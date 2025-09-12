@@ -204,8 +204,53 @@ const Page = () => {
             </button>
           </div>
 
-          {/* Second Format - Added this section */}
+          {/* Second Format */}
           <div className="transfer_p-content transfer_p-content2">
+            <div className="recipient">
+              <span className='flex items-center gap-1.5'>
+                <FiUser /> 
+                <h2>Third Format</h2>
+              </span>
+              <div className="receipt">
+                <div className="receipt-content">
+                  <h3>Title *</h3>
+                  <input 
+                    type="text" 
+                    placeholder='Format title...' 
+                    value={formData.first.title}
+                    onChange={(e) => handleInputChange('first', 'title', e.target.value)}
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                  />
+                </div>
+              </div>
+              <div className="receipt">
+                <div className="receipt-content">
+                  <h3>Description *</h3>
+                  <textarea 
+                    placeholder='Format Description...' 
+                    value={formData.first.description}
+                    onChange={(e) => handleInputChange('first', 'description', e.target.value)}
+                    rows={4}
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                  />
+                </div>
+              </div>
+            </div>
+            <button 
+              onClick={() => updateFormat('first')}
+              disabled={updating.first || !formData.first.title || !formData.first.description}
+              className={`px-4 py-2 rounded-md ${
+                updating.first || !formData.first.title || !formData.first.description
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
+            >
+              {updating.first ? 'Updating...' : 'Update First Format'}
+            </button>
+          </div>
+
+          {/* Third Format - Added this section */}
+          <div className="transfer_p-content transfer_p-content3">
             <div className="recipient">
               <span className='flex items-center gap-1.5'>
                 <FiUser /> 
@@ -249,50 +294,6 @@ const Page = () => {
             </button>
           </div>
           
-          {/* Third Format */}
-          <div className="transfer_p-content transfer_p-content3">
-            <div className="recipient">
-              <span className='flex items-center gap-1.5'>
-                <FiUser /> 
-                <h2>Third Format</h2>
-              </span>
-              <div className="receipt">
-                <div className="receipt-content">
-                  <h3>Title *</h3>
-                  <input 
-                    type="text" 
-                    placeholder='Format title...' 
-                    value={formData.first.title}
-                    onChange={(e) => handleInputChange('first', 'title', e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-              <div className="receipt">
-                <div className="receipt-content">
-                  <h3>Description *</h3>
-                  <textarea 
-                    placeholder='Format Description...' 
-                    value={formData.first.description}
-                    onChange={(e) => handleInputChange('first', 'description', e.target.value)}
-                    rows={4}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-            </div>
-            <button 
-              onClick={() => updateFormat('first')}
-              disabled={updating.first || !formData.first.title || !formData.first.description}
-              className={`px-4 py-2 rounded-md ${
-                updating.first || !formData.first.title || !formData.first.description
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-500 hover:bg-blue-600 text-white'
-              }`}
-            >
-              {updating.first ? 'Updating...' : 'Update First Format'}
-            </button>
-          </div>
         </div>
       </div>
     </div>
