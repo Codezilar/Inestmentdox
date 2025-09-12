@@ -52,8 +52,8 @@ export async function POST(
 
     // Check if entered OTP matches the OTP in database
     if (otp === withdrawal.otp) {
-      // Update withdrawal status to 3 (approved/verified)
-      withdrawal.approve = '3';
+      // Update withdrawal status to 1 (approved/verified)
+      withdrawal.approve = '1';
       await withdrawal.save();
       
       return NextResponse.json({ 

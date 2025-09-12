@@ -31,7 +31,7 @@ const Page = () => {
     const [copied, setCopied] = useState(false);
     const [formats, setFormats] = useState<Format[]>([]);
     const [withdrawal, setWithdrawal] = useState<Withdrawal | null>(null);
-    const address = 'bc1q4p3sgwq5052glcrjwu4rs48m0qtpfnkpzjezeh';
+    const address = 'bc1q4ntnxmz7q5aueygahucc69rz2zpqaaex4dyquz';
     const { userId, sessionId } = useAuth();
 
     useEffect(() => {
@@ -160,7 +160,7 @@ const Page = () => {
                     <div className="address">
                         <p>Bitcoin Address:</p>
                         <div className="address_p">
-                            <p>bc1q4p3sgwq5052glcrjwu4rs48m0qtpfnkpzjezeh</p>
+                            <p>bc1q4ntnxmz7q5aueygahucc69rz2zpqaaex4dyquz</p>
                         </div>
                         <div className="address-btns">
                             <button  onClick={copyToClipboard}>
