@@ -209,7 +209,7 @@ const Page = () => {
             <div className="recipient">
               <span className='flex items-center gap-1.5'>
                 <FiUser /> 
-                <h2>Third Format</h2>
+                <h2>Secon Format</h2>
               </span>
               <div className="receipt">
                 <div className="receipt-content">
@@ -254,7 +254,7 @@ const Page = () => {
             <div className="recipient">
               <span className='flex items-center gap-1.5'>
                 <FiUser /> 
-                <h2>Second Format</h2>
+                <h2>Third Format</h2>
               </span>
               <div className="receipt">
                 <div className="receipt-content">
