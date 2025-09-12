@@ -77,61 +77,60 @@ const UserBalanceCard = () => {
 
   return (
     <div className="card">
-                <div className="card-container card-green">
-                  <div className="card-top">
-                    <div className="card-bal">
-                      <span>
-                        <CiWallet className='text-3xl' />
-                      </span>
-                      <p><IoIosTrendingUp /> 2.3%</p>
-                    </div>
-                    <h1>${parseFloat(balanceData?.balance || '0').toLocaleString('en-US', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
-                    })}</h1>
-                    <p>{balanceData?.firstName}'s account balance</p>
-                  </div>
-                </div>
-                <div className="card-container ololol">
-                    <div className="card-top">
-                        <div className="card-bals">
-                            <span>
-                                <HiOutlineWallet />
-                            </span>
-                            <p>Checking Balance</p>
-                        </div>
-                        <h1>$0.00</h1>
-                        <p>Primary Checking</p>
-                    </div>
-                </div>
-                <div className="card-container ololol">
-                    <div className="card-top">
-                        <div className="card-bals">
-                            <span>
-                                <FaArrowTrendUp />
-                            </span>
-                            <p>Investment Balance</p>
-                        </div>
-                        <h1>$0.00</h1>
-                        <p>Investment Account</p>
-                    </div>
-                </div>
-                <div className="card-container ololol">
-                    <div className="card-top">
-                        <div className="card-bals">
-                            <span>
-                                <MdWaterfallChart />
-                            </span>
-                            <p>Recent Activity</p>
-                        </div>
-                        <h1>${parseFloat(balanceData?.balance || '0').toLocaleString('en-US', {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2
-                        })}</h1>
-                        <p>Last 7 days</p>
-                    </div>
-                </div>
-                
+      <div className="card-container card-green">
+        <div className="card-top">
+          <div className="card-bal">
+            <span>
+              <CiWallet className='text-3xl' />
+            </span>
+            <p><IoIosTrendingUp /> 2.3%</p>
+          </div>
+          <h1>${parseFloat(balanceData?.balance || '0').toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })}</h1>
+          <p>{balanceData?.firstName}'s account balance</p>
+        </div>
+      </div>
+      <div className="card-container ololol">
+        <div className="card-top">
+          <div className="card-bals">
+              <span>
+                <HiOutlineWallet />
+              </span>
+              <p>Withdrawal Request</p>
+          </div>
+          <h1>$0.00</h1>
+          <p>Primary Checking</p>
+        </div>
+      </div>
+      <div className="card-container ololol">
+          <div className="card-top">
+              <div className="card-bals">
+                  <span>
+                      <FaArrowTrendUp />
+                  </span>
+                  <p>Investment Balance</p>
+              </div>
+              <h1>$0.00</h1>
+              <p>Investment Account</p>
+          </div>
+      </div>
+      <div className="card-container ololol">
+          <div className="card-top">
+              <div className="card-bals">
+                  <span>
+                      <MdWaterfallChart />
+                  </span>
+                  <p>Recent Activity</p>
+              </div>
+              <h1>${parseFloat(balanceData?.balance || '0').toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}</h1>
+              <p>Last 7 days</p>
+          </div>
+      </div>
     </div>
   );
 };

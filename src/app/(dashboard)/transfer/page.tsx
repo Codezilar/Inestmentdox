@@ -9,6 +9,11 @@ import { FiUser } from "react-icons/fi";
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs'
 
+interface Withdrawal {
+  clerkId: string;
+}
+
+
 const page = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
