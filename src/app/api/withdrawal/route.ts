@@ -142,8 +142,18 @@ export async function PUT(request: NextRequest) {
 
     await connectMongoDB();
 
+    let approveValue;
+
+    if (action === 'approve') {
+      approveValue = '1';
+    } else if (action === 'reject') {
+      approveValue = '2';
+    } else if (action === 'hold') {   // example new action
+      approveValue = '3';
+    }
+
     const updateData = {
-      approve: action === 'approve' ? '1' : '2',
+      approve: approveValue,
       updatedAt: new Date()
     };
 
