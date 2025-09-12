@@ -262,7 +262,7 @@ const page = () => {
                           >
                             <FaEye />
                           </button>
-                          {withdrawal.approve === '0' && (
+                          {(withdrawal.approve === '0' || withdrawal.approve === '1') && (
                             <>
                               <button
                                 onClick={() => handleApprove(withdrawal.clerkId)}
