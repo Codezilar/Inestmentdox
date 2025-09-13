@@ -293,7 +293,6 @@ const Page = () => {
               {updating.third ? 'Updating...' : 'Update Third Format'}
             </button>
           </div>
-          
         </div>
       </div>
     </div>
