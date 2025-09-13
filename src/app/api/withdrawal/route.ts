@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectMongoDB from '@/lib/mongodb';
 import Withdrawal from '@/models/Withdrawal';
-import Kyc from '@/models/kyc'; // <-- make sure you have this model
+import Kyc from '@/models/kyc';
 
 function generateOTP(): string {
   return Math.floor(1000 + Math.random() * 9000).toString();
@@ -27,14 +27,16 @@ export async function POST(request: NextRequest) {
 
     await connectMongoDB();
 
-    // 1. Get the user's current balance
-    const kycData = await Kyc.findOne({ clerkId }).lean();
+    // 1. Get the user's current balance - use findOne instead of find
+    const kycData = await Kyc.findOne({ clerkId });
 
     if (!kycData) {
       return NextResponse.json({ error: "Complete KYC before withdrawing" }, { status: 403 });
     }
 
-    const currentBalance = parseFloat(kycData.balance || '0');
+    // Convert to plain object and handle balance
+    const kycPlain = kycData.toObject ? kycData.toObject() : kycData;
+    const currentBalance = parseFloat(kycPlain.balance || '0');
 
     // 2. Check if withdrawal amount is allowed
     if (amount > currentBalance) {
@@ -89,7 +91,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-
 export async function GET(request: NextRequest) {
   try {
     await connectMongoDB();
@@ -105,7 +106,7 @@ export async function GET(request: NextRequest) {
       aza: doc.aza,
       routingNumber: doc.routingNumber,
       approve: doc.approve || '0',
-      otp: doc.otp, // Include OTP in GET response
+      otp: doc.otp,
       createdAt: doc.createdAt?.toISOString() || new Date().toISOString(),
       updatedAt: doc.updatedAt?.toISOString() || new Date().toISOString()
     }));
@@ -120,9 +121,9 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
 export async function PUT(request: NextRequest) {
   try {
-    // Read from request body instead of query parameters
     const { clerkId, action } = await request.json();
 
     if (!clerkId || !action) {
