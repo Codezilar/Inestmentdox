@@ -1,8 +1,10 @@
+// src/app/api/withdrawal/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import connectMongoDB from '@/lib/mongodb';
 import Withdrawal from '@/models/Withdrawal';
+import Kyc from '@/models/kyc'; // <-- make sure you have this model
 
-// Generate a random 4-digit OTP
 function generateOTP(): string {
   return Math.floor(1000 + Math.random() * 9000).toString();
 }
@@ -10,30 +12,42 @@ function generateOTP(): string {
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
-    
+
     const clerkId = formData.get('clerkId') as string;
-    const amount = formData.get('amount') as string;
+    const amount = parseFloat(formData.get('amount') as string);
     const transferType = formData.get('transferType') as string;
     const recipientName = formData.get('recipientName') as string;
     const bankName = formData.get('bankName') as string;
     const aza = formData.get('aza') as string;
     const routingNumber = formData.get('routingNumber') as string;
-    
-    // Validate required fields
+
     if (!clerkId || !amount || !transferType || !recipientName || !bankName || !aza || !routingNumber) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+
+    await connectMongoDB();
+
+    // 1. Get the user's current balance
+    const kycData = await Kyc.findOne({ clerkId }).lean();
+
+    if (!kycData) {
+      return NextResponse.json({ error: "Complete KYC before withdrawing" }, { status: 403 });
+    }
+
+    const currentBalance = parseFloat(kycData.balance || '0');
+
+    // 2. Check if withdrawal amount is allowed
+    if (amount > currentBalance) {
       return NextResponse.json(
-        { error: "Missing required fields" }, 
+        { error: `Insufficient balance. You only have $${currentBalance.toFixed(2)}` },
         { status: 400 }
       );
     }
 
-    await connectMongoDB();
+    // 3. If valid, create/update withdrawal
     const existingWithdrawal = await Withdrawal.findOne({ clerkId });
-
-    // Generate OTP
     const otp = generateOTP();
 
-    // Update or create withdrawal record
     const withdrawalData = {
       clerkId,
       amount,
@@ -43,7 +57,7 @@ export async function POST(request: NextRequest) {
       aza,
       routingNumber,
       approve: "0",
-      otp // Add OTP field
+      otp,
     };
 
     let result;
@@ -58,45 +72,23 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { 
-        message: existingWithdrawal ? "Withdrawal Updated Successfully" : "Withdrawal Request Submitted",
+      {
+        message: existingWithdrawal
+          ? "Withdrawal Updated Successfully"
+          : "Withdrawal Request Submitted",
         accountNumber: aza,
-        isReapplication: !!existingWithdrawal,
         approve: "0",
-        otp // Return OTP in response
-      }, 
+        otp,
+      },
       { status: 201 }
     );
   } catch (error: any) {
-    console.error('Withdrawal submission error:', error);
-    
-    if (error.name === 'ValidationError') {
-      const validationErrors = Object.values(error.errors).map((e: any) => ({
-        field: e.path,
-        message: e.message,
-        value: e.value
-      }));
-      console.error('MongoDB Validation errors:', validationErrors);
-      
-      return NextResponse.json(
-        { error: "Validation Failed", details: validationErrors }, 
-        { status: 400 }
-      );
-    }
-    
-    if (error.code === 11000) {
-      return NextResponse.json(
-        { error: "Withdrawal application already exists for this user" }, 
-        { status: 409 }
-      );
-    }
-    
-    return NextResponse.json(
-      { error: "Internal Server Error" }, 
-      { status: 500 }
-    );
+    console.error("Withdrawal submission error:", error);
+
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+
 
 export async function GET(request: NextRequest) {
   try {
