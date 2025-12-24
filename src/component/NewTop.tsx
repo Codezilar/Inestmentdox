@@ -14,7 +14,7 @@ const NewTop = () => {
         <div className="newboard-container">
             <div className="new-top">
                 <span>
-                    <span className="newLogo">Trust Spring</span>
+                    <span className="newLogo">Goldman Bank</span>
                     <h1>
                         Hello, {fullName}!
                     </h1>
