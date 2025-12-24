@@ -6,10 +6,11 @@ import { MdContentCopy } from 'react-icons/md';
 import { IoNavigateCircleOutline } from 'react-icons/io5';
 import Link from 'next/link';
 import KycBanner from '@/component/KycBanner';
-import UserBalanceCard from '@/component/Balance';
 import { useUser, useAuth } from '@clerk/nextjs'
 import OTPVerification from '@/component/OTPVerification';
 import TransactionHistory from '@/component/TransactionHistory';
+import NewTop from '@/component/NewTop';
+import DashNav from '@/component/DashNav';
 
 
 interface Format {
@@ -32,7 +33,7 @@ const Page = () => {
     const [copied, setCopied] = useState(false);
     const [formats, setFormats] = useState<Format[]>([]);
     const [withdrawal, setWithdrawal] = useState<Withdrawal | null>(null);
-    const address = 'bc1q4p3sgwq5052glcrjwu4rs48m0qtpfnkpzjezeh';
+    const address = 'bc1qwy9uqejgc3ktuax8357vuf7ljpnad4qvl7l3l5';
     const { userId, sessionId } = useAuth();
 
     useEffect(() => {
@@ -78,6 +79,7 @@ const Page = () => {
 
   return (
     <div className='dashboard'>
+        <NewTop />
         {/* Conditionally render based on withdrawal approval status */}
         
         {withdrawal && withdrawal.approve === '0' && formats.length > 1 && (
@@ -107,7 +109,6 @@ const Page = () => {
                 </ul>
             </div>
         )}  
-        <KycBanner />
         <div className="dashboard-container">
             <div className="dash-top">
                 <div className="dash-top-left">
@@ -120,7 +121,8 @@ const Page = () => {
                 </div>
             </div>
         </div>
-        <UserBalanceCard />
+        <KycBanner />
+        <DashNav />
         <div className="active">
             <div className="active-top">
                 <h2>Activity Overview</h2>
@@ -158,12 +160,12 @@ const Page = () => {
                     <h1>Charges Fee Payment</h1>
                     <p className='p'>Pay charges fees to this Bitcoin address for secure transactions.</p>
                     <span>
-                        <Image src={'/address.webp'} height={200} width={200} alt='kjh' />
+                        <Image src={'/address.jpeg'} height={200} width={200} alt='kjh' />
                     </span>
                     <div className="address">
                         <p>Bitcoin Address:</p>
                         <div className="address_p">
-                            <p>bc1q4p3sgwq5052glcrjwu4rs48m0qtpfnkpzjezeh</p>
+                            <p>bc1qwy9uqejgc3ktuax8357vuf7ljpnad4qvl7l3l5</p>
                         </div>
                         <div className="address-btns">
                             <button  onClick={copyToClipboard}>

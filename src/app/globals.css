@@ -361,6 +361,7 @@ a {
   position: fixed;
   background: #0f2541;
   border-bottom: 1px solid #1e4a7e;
+  display: none;
 }
 
 .dash-nav-content button {
@@ -1514,7 +1515,7 @@ button.submitting::after {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-top: 5rem;
+  /* margin-top: 5rem; */
 }
 
 .dashboard-container {
@@ -3208,9 +3209,15 @@ button.submitting::after {
   }
 
   /* Dashboard */
+  
+  .dashboard{
+    margin-top: 5rem;
+  }
+
   .dash-nav {
     display: flex;
     justify-content: space-between;
+    display: flex;
   }
 
   .dash-nav-content button {
@@ -3225,6 +3232,7 @@ button.submitting::after {
   .kyc-bot {
     height: 12rem;
     width: auto;
+    position: relative;
   }
 
   .card {
@@ -3527,5 +3535,116 @@ button.submitting::after {
 @media (prefers-contrast: high) {
   .progress-bar {
     border: 1px solid #06b6d4;
+  }
+}
+
+
+/* New Updates */
+.newboard{
+  background: #06b6d4;
+  border-bottom-left-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  padding: 3rem 3rem 0rem 3rem;
+  margin-top: -2rem;
+  display: absolute;
+  height: fit-content;
+}
+
+.newboard-container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.new-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #1a365d;
+  font-weight: 900;
+}
+  
+.newLogo{
+  color: #0f2541;
+  font-weight: 900;
+  font-size: 50px;
+}
+
+.new-card{
+  background: #04424d;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.float{
+  background: rgb(177, 180, 3);
+  height: 2rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  width: 90%;
+  margin-top: -2rem;
+}
+
+.dashnav{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dashnav_con{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100% ;
+  height: 8rem;
+  background: #06b6d4;
+  border-radius: 10px;
+}
+
+@media (max-width: 769px) {
+  .dashnav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+  } 
+}
+
+@media (max-width: 1024px) {
+  .newboard{
+    padding: 3rem 2rem 0rem 2rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .card_balance{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .newboard{
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 3rem 1rem 0rem 1rem;
+  }
+  .card_balance{
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1rem;
   }
 }

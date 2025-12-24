@@ -224,7 +224,7 @@ const UserBalanceCard: React.FC = () => {
   });
 
   return (
-    <div className="card">
+    <div className="card card_balance">
       {/* Main Balance Card */}
       <div className="card-container card-green">
         <div className="card-top">
