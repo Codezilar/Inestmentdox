@@ -18,7 +18,7 @@ const NewTop = () => {
                     <h1>
                         Hello, {fullName}!
                     </h1>
-                    <p>Welcome to Trust Spring. Your financial overview is below.</p>
+                    <p>Welcome to Goldman Bank. Your financial overview is below.</p>
                 </span>
                 <UserButton
                     appearance={{
