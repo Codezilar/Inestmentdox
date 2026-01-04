@@ -7,19 +7,14 @@ const validateCloudinaryConfig = () => {
     'CLOUDINARY_API_KEY', 
     'CLOUDINARY_API_SECRET'
   ];
-
   const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
-  
   if (missingVars.length > 0) {
     const errorMessage = `Missing Cloudinary environment variables: ${missingVars.join(', ')}`;
     console.error('❌', errorMessage);
     throw new Error(errorMessage);
   }
-
   return true;
 };
-
-// Configure Cloudinary
 const configureCloudinary = () => {
   try {
     if (validateCloudinaryConfig()) {
