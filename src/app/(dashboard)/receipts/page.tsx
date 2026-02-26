@@ -9,8 +9,6 @@ import {
   FiSearch, 
   FiFilter, 
   FiCalendar,
-  FiDollarSign,
-  FiUser,
   FiArrowDown,
   FiArrowUp,
   FiEye,
@@ -58,7 +56,7 @@ const ReceiptModal: React.FC<ReceiptModalProps> = ({ transaction, onClose }) => 
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
       <div className="bg-gray-800 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center">
-          <h3 className="text-xl font-semibold text-white">Transaction Receipt</h3>
+          <h3 className="text-xl font-semibold text-white">Goldman Bank</h3>
           <div className="flex gap-2">
             <button
               onClick={handlePrint}
@@ -105,6 +103,11 @@ const ReceiptModal: React.FC<ReceiptModalProps> = ({ transaction, onClose }) => 
 
             <div className="space-y-3">
               <div className="flex justify-between">
+                <span className="text-gray-400">Name</span>
+                <span className="text-white">{transaction.firstName || ''} {transaction.lastName || ''}</span>
+              </div>
+
+              <div className="flex justify-between">
                 <span className="text-gray-400">Transaction ID</span>
                 <span className="text-white font-mono text-sm">{transaction._id}</span>
               </div>
@@ -112,11 +115,6 @@ const ReceiptModal: React.FC<ReceiptModalProps> = ({ transaction, onClose }) => 
               <div className="flex justify-between">
                 <span className="text-gray-400">User ID</span>
                 <span className="text-white font-mono text-sm">{transaction.clerkId}</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span className="text-gray-400">Name</span>
-                <span className="text-white">{transaction.firstName || ''} {transaction.lastName || ''}</span>
               </div>
               
               <div className="flex justify-between">
