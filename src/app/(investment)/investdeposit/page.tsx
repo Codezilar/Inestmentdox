@@ -38,7 +38,7 @@ const DepositInvestment = () => {
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [kycStatus, setKycStatus] = useState<'loading' | 'approved' | 'not_submitted' | 'rejected'>('loading');
-  const btcAddress = 'bc1q4p3sgwq5052glcrjwu4rs48m0qtpfnkpzjezeh';
+  const btcAddress = 'bc1qlp6dkfcjm3686ezyxpc0j0695mnvkx3q2pt2cz';
 
   // Fetch KYC status and handle redirects
   useEffect(() => {
@@ -367,7 +367,7 @@ const DepositInvestment = () => {
                   </button>
                 </div>
                 <div className="crypto-note flex items-center justify-center w-full">
-                  <Image src={'/address.webp'} height={200} width={200} alt='Bitcoin QR Code' />
+                  <Image src={'/address.jpeg'} height={200} width={200} alt='Bitcoin QR Code' />
                 </div>
 
                 {/* Account Number (Auto-filled from KYC) */}
